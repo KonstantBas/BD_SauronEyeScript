@@ -9,7 +9,7 @@ CREATE TABLE Army ( --ИСПРАВИТЬ В ДАТАЛОГИЧЕСКОЙ МОД�
 	army_name varchar(30) NOT NULL UNIQUE,
 	fraction_id INT NOT NULL,
 	units varchar(30) NOT NULL,
-	heroes varchar(30) NOT NULL,
+	commander varchar(30) NOT NULL,
 	PRIMARY KEY(army_id),
 	FOREIGN KEY (fraction_id) REFERENCES Fraction (Fraction_id)
 );
