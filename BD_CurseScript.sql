@@ -60,6 +60,17 @@ CREATE TABLE artifact (    -- ИСПРАВИТЬ В ДАТАЛОГИЧЕСКОЙ
 	FOREIGN KEY (Hero_id) REFERENCES Hero (Hero_id)
 );
 
+CREATE TABLE Ability (
+	ability_id INT NOT NULL UNIQUE,
+	Hero_id INT NOT NULL ,
+	power INT NOT NULL ,
+	
+	ability_name varchar(30) NOT NULL UNIQUE,
+	
+	PRIMARY KEY(ability_id),
+	FOREIGN KEY (Hero_id) REFERENCES Hero (Hero_id)
+);
+
 CREATE TABLE History (
 	Battle_id INT NOT NULL UNIQUE,
 	army1_id INT NOT NULL ,
