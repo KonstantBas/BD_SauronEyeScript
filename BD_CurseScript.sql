@@ -1,102 +1,87 @@
 CREATE TABLE Fraction (
-	Fraction_id INT NOT NULL UNIQUE,
+	id INT NOT NULL UNIQUE,
 	name varchar(30) NOT NULL UNIQUE, 
-	PRIMARY KEY(Fraction_id)
+	PRIMARY KEY(id)
 );
 
-CREATE TABLE Army ( --ИСПРАВИТЬ В ДАТАЛОГИЧЕСКОЙ МОДЕЛИ
-	army_id INT NOT NULL UNIQUE,
-	army_name varchar(30) NOT NULL UNIQUE,
-	fraction_id INT NOT NULL,
-	units varchar(30) NOT NULL,
-	commander varchar(30) NOT NULL,
-	PRIMARY KEY(army_id),
-	FOREIGN KEY (fraction_id) REFERENCES Fraction (Fraction_id)
-);
-
-CREATE TABLE Unit ( --ИСПРАВИТЬ В ДАТАЛОГИЧЕСКОЙ МОДЕЛИ
-
-	unit_id INT NOT NULL UNIQUE,
+CREATE TABLE Army (
+	id INT NOT NULL UNIQUE,
 	name varchar(30) NOT NULL UNIQUE,
-	army_id INT NOT NULL ,
-	
-	power INT NOT NULL,
-	
-	PRIMARY KEY(unit_id),
-	FOREIGN KEY(army_id) REFERENCES Army (army_id)
-	
+	fraction_id INT NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (fraction_id) REFERENCES Fraction (id)
 );
 
-CREATE TABLE Strenght (
-	strenght_id INT NOT NULL UNIQUE,
-	Strenght_name varchar(30) NOT NULL UNIQUE,
+CREATE TABLE Unit (
+	id INT NOT NULL UNIQUE,
+	name varchar(30) NOT NULL UNIQUE,
+	army_id INT NOT NULL,
+	power INT NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY(army_id) REFERENCES Army (id)
+);
+
+CREATE TABLE Strength (
+	id INT NOT NULL UNIQUE,
+	strength_name varchar(30) NOT NULL UNIQUE,
 	target_id INT NOT NULL UNIQUE,
 	unit_id INT NOT NULL UNIQUE,
 	power INT NOT NULL,
-	
-	PRIMARY KEY(strenght_id),
-	FOREIGN KEY(unit_id) REFERENCES Unit (unit_id)
-
+	PRIMARY KEY(id),
+	FOREIGN KEY(unit_id) REFERENCES Unit (id)
 );
 
 CREATE TABLE Hero(
-	Hero_id INT NOT NULL UNIQUE,
-	Hero_name varchar(30) NOT NULL UNIQUE,
-	ability_id INT NOT NULL UNIQUE,
+	id INT NOT NULL UNIQUE,
+	hero_name varchar(30) NOT NULL UNIQUE,
+	abillity_id INT NOT NULL UNIQUE,
 	artifact_id INT NOT NULL UNIQUE,
 	army_id INT NOT NULL,
-	PRIMARY KEY (Hero_id),
-	FOREIGN KEY (army_id) REFERENCES army (army_id)
+	PRIMARY KEY (id),
+	FOREIGN KEY (army_id) REFERENCES Army (id)
 );
 
-CREATE TABLE artifact (    -- ИСПРАВИТЬ В ДАТАЛОГИЧЕСКОЙ МОДЕЛИ
-	artifact_id INT NOT NULL UNIQUE,
-	Hero_id INT NOT NULL ,
-	power INT NOT NULL ,
-	
-	artifact_name varchar(30) NOT NULL UNIQUE,
-	
-	PRIMARY KEY(artifact_id),
-	FOREIGN KEY (Hero_id) REFERENCES Hero (Hero_id)
+CREATE TABLE Artifact (
+	id INT NOT NULL UNIQUE,
+	hero_id INT NOT NULL,
+	power INT NOT NULL,
+	name varchar(30) NOT NULL UNIQUE,
+	PRIMARY KEY(id),
+	FOREIGN KEY (hero_id) REFERENCES Hero (id)
 );
 
-CREATE TABLE Ability (
-	ability_id INT NOT NULL UNIQUE,
-	Hero_id INT NOT NULL ,
-	power INT NOT NULL ,
-	
-	ability_name varchar(30) NOT NULL UNIQUE,
-	
-	PRIMARY KEY(ability_id),
-	FOREIGN KEY (Hero_id) REFERENCES Hero (Hero_id)
+CREATE TABLE Abillity (
+	id INT NOT NULL UNIQUE,
+	hero_id INT NOT NULL,
+	power INT NOT NULL,
+	name varchar(30) NOT NULL UNIQUE,
+	PRIMARY KEY(id),
+	FOREIGN KEY (hero_id) REFERENCES Hero (id)
 );
 
 CREATE TABLE History (
-	Battle_id INT NOT NULL UNIQUE,
-	army1_id INT NOT NULL ,
-	army2_id INT NOT NULL ,
-	location_id INT NOT NULL ,
-	result bool NOT NULL,
-	
-	PRIMARY KEY(Battle_id)
-	
+	id INT NOT NULL UNIQUE,
+	army1_id INT NOT NULL,
+	army2_id INT NOT NULL,
+	location_id INT NOT NULL,
+	winner_army_id INT NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (winner_army_id) REFERENCES Army (id)
 );
 
-CREATE TABLE Location (
-	Location_id INT NOT NULL UNIQUE,
+CREATE TABLE Location ( -- Локация может существовать без форта, но форт без локации - нет
+	id INT NOT NULL UNIQUE,
 	name varchar(30) NOT NULL UNIQUE,
 	type_id INT NOT NULL UNIQUE,
-	fort_id INT NOT NULL UNIQUE,
-	PRIMARY KEY(Location_id)
-	
+	fort_id INT,
+	PRIMARY KEY(id)
 );
 
 CREATE TABLE Fort (
-	Fort_id INT NOT NULL UNIQUE,
+	id INT NOT NULL UNIQUE,
 	name varchar(30) NOT NULL UNIQUE,
-	Location_id INT NOT NULL UNIQUE,
-	defenceScore INT NOT NULL,
-	PRIMARY KEY(Fort_id),
-	FOREIGN KEY (Location_id) REFERENCES Location (Location_id)
-
+	location_id INT NOT NULL UNIQUE,
+	defence_score INT NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (location_id) REFERENCES Location (id)
 );
