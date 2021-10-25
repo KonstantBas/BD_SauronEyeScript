@@ -17,7 +17,7 @@ CREATE TABLE Army (
 CREATE TABLE Unit ( --ИСПРАВИТЬ В ДАТАЛОГИЧЕСКОЙ МОДЕЛИ
 	unit_id INT NOT NULL UNIQUE,
 	name varchar(30) NOT NULL UNIQUE,
-	army_id INT NOT NULL ,
+	army_id INT NOT NULL,
 	power INT NOT NULL,
 	PRIMARY KEY(unit_id),
 	FOREIGN KEY(army_id) REFERENCES Army (army_id)
@@ -46,27 +46,27 @@ CREATE TABLE Hero(
 
 CREATE TABLE Artifact (    -- ИСПРАВИТЬ В ДАТАЛОГИЧЕСКОЙ МОДЕЛИ
 	artifact_id INT NOT NULL UNIQUE,
-	hero_id INT NOT NULL ,
-	power INT NOT NULL ,
+	hero_id INT NOT NULL,
+	power INT NOT NULL,
 	artifact_name varchar(30) NOT NULL UNIQUE,
 	PRIMARY KEY(artifact_id),
 	FOREIGN KEY (hero_id) REFERENCES Hero (hero_id)
 );
 
-CREATE TABLE Abillity (
+CREATE TABLE Ability (
 	ability_id INT NOT NULL UNIQUE,
-	hero_id INT NOT NULL ,
-	power INT NOT NULL ,
-	abillity_name varchar(30) NOT NULL UNIQUE,
-	PRIMARY KEY(abillity_id),
+	hero_id INT NOT NULL,
+	power INT NOT NULL,
+	ability_name varchar(30) NOT NULL UNIQUE,
+	PRIMARY KEY(ability_id),
 	FOREIGN KEY (hero_id) REFERENCES Hero (hero_id)
 );
 
 CREATE TABLE History (
 	battle_id INT NOT NULL UNIQUE,
-	army1_id INT NOT NULL ,
-	army2_id INT NOT NULL ,
-	location_id INT NOT NULL ,
+	army1_id INT NOT NULL,
+	army2_id INT NOT NULL,
+	location_id INT NOT NULL,
 	result bool NOT NULL,
 	PRIMARY KEY(battle_id)
 );
