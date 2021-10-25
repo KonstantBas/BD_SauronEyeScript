@@ -95,7 +95,7 @@ CREATE TABLE Fort (
 	fort_id INT NOT NULL UNIQUE,
 	name varchar(30) NOT NULL UNIQUE,
 	location_id INT NOT NULL UNIQUE,
-	defenceScore INT NOT NULL,
+	defence_score INT NOT NULL,
 	PRIMARY KEY(fort_id),
 	FOREIGN KEY (location_id) REFERENCES location (location_id)
 
